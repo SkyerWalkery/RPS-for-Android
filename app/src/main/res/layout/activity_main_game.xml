@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainGameActivity">
+
+    <TextView
+        android:id="@+id/winning_cnt"
+        android:layout_width="320dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="52dp"
+        android:text="@string/winning_cnt_tv"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/winning_rate"
+        android:layout_width="320dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/winning_rate_tv"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/winning_cnt" />
+
+    <TextView
+        android:id="@+id/ai_state"
+        android:layout_width="320dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="211dp" />
+
+    <Button
+        android:id="@+id/player_choose_rock"
+        android:layout_width="89dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="196dp"
+        android:onClick="playerChoose"
+        android:text="rock"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/player_choose_scissors"
+        android:layout_width="89dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="196dp"
+        android:onClick="playerChoose"
+        android:text="scissors"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/player_choose_paper"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_marginBottom="196dp"
+        android:onClick="playerChoose"
+        android:text="paper"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/player_choose_scissors"
+        app:layout_constraintStart_toEndOf="@+id/player_choose_rock" />
+
+    <Button
+        android:id="@+id/new_round"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_marginBottom="196dp"
+        android:onClick="startNewRound"
+        android:text="@string/new_round"
+        android:textAlignment="textStart"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/player_choose_scissors"
+        app:layout_constraintStart_toEndOf="@+id/player_choose_rock" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
