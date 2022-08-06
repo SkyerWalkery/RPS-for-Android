@@ -1,5 +1,6 @@
 package com.example.artificialstupidity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -39,6 +40,7 @@ class Rock implements Choice{
     public Result eval(Scissors against){
         return Result.LOSE;
     }
+    @NonNull
     @Override
     public String toString() {return "Rock";}
 }
@@ -60,6 +62,7 @@ class Paper implements Choice{
     public Result eval(Scissors against){
         return Result.WIN;
     }
+    @NonNull
     @Override
     public String toString() {return "Paper";}
 }
@@ -81,6 +84,7 @@ class Scissors implements Choice{
     public Result eval(Scissors against){
         return Result.DRAW;
     }
+    @NonNull
     @Override
     public String toString() {return "Scissors";}
 }
@@ -114,6 +118,17 @@ public class MainGameActivity extends AppCompatActivity {
         new_round_btn = (Button) findViewById(R.id.new_round);
         // new round button is gone by default
         new_round_btn.setVisibility(View.GONE);
+
+        String init_succ_cnt_text = getString(
+                R.string.winning_cnt_tv,
+                0
+        );
+        String init_succ_rate_text = getString(
+                R.string.winning_rate_tv,
+                0.0
+        );
+        winning_cnt_tv.setText(init_succ_cnt_text);
+        winning_rate_tv.setText(init_succ_rate_text);
     }
 
     public void playerChoose(View view){
@@ -159,11 +174,11 @@ public class MainGameActivity extends AppCompatActivity {
             ++winning_cnt;
         ++total_rounds;
         String new_succ_cnt_text = getString(
-                R.string.winning_cnt_fmt_str,
+                R.string.winning_cnt_tv,
                 winning_cnt
         );
         String new_succ_rate_text = getString(
-                R.string.winning_rate_fmt_str,
+                R.string.winning_rate_tv,
                 (double)winning_cnt / total_rounds * 100
         );
         winning_cnt_tv.setText(new_succ_cnt_text);
