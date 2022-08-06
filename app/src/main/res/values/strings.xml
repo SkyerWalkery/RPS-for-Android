@@ -12,10 +12,10 @@
         Winning Count: %1$d
     </string>
     <string name="draw_cnt_tv">
-        Winning Count: %1$d
+        Draw Count: %1$d
     </string>
     <string name="losing_cnt_tv">
-        Winning Count: %1$d
+        Losing Count: %1$d
     </string>
     <string name="winning_rate_tv">
         Winning Rate: %1$.1f%%

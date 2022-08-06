@@ -13,7 +13,7 @@ import java.util.Random;
 
 
 enum Result{
-    WIN, DRAW, LOSE;
+    WIN, DRAW, LOSE
 }
 
 interface Choice {
@@ -95,9 +95,13 @@ public class MainGameActivity extends AppCompatActivity {
     private static final Random rand = new Random();
     private int total_rounds = 0;
     private int winning_cnt = 0;
+    private int draw_cnt = 0;
+    private int losing_cnt = 0;
 
     private TextView ai_state_tv;
     private TextView winning_cnt_tv;
+    private TextView draw_cnt_tv;
+    private TextView losing_cnt_tv;
     private TextView winning_rate_tv;
     private Button[] player_choose_btns;
     private Button new_round_btn;
@@ -109,6 +113,8 @@ public class MainGameActivity extends AppCompatActivity {
 
         ai_state_tv = (TextView) findViewById(R.id.ai_state);
         winning_cnt_tv = (TextView) findViewById(R.id.winning_cnt);
+        draw_cnt_tv = (TextView) findViewById(R.id.draw_cnt);
+        losing_cnt_tv = (TextView) findViewById(R.id.losing_cnt);
         winning_rate_tv = (TextView) findViewById(R.id.winning_rate);
         player_choose_btns = new Button[]{
                 (Button) findViewById(R.id.player_choose_rock),
@@ -119,16 +125,7 @@ public class MainGameActivity extends AppCompatActivity {
         // new round button is gone by default
         new_round_btn.setVisibility(View.GONE);
 
-        String init_succ_cnt_text = getString(
-                R.string.winning_cnt_tv,
-                0
-        );
-        String init_succ_rate_text = getString(
-                R.string.winning_rate_tv,
-                0.0
-        );
-        winning_cnt_tv.setText(init_succ_cnt_text);
-        winning_rate_tv.setText(init_succ_rate_text);
+        updateTextInfo();
     }
 
     public void playerChoose(View view){
@@ -170,22 +167,44 @@ public class MainGameActivity extends AppCompatActivity {
     * for example: Rock(player), Scissors(AI) -> Result.WIN
      */
     private void handleResult(Result result){
-        if(result == Result.WIN)
-            ++winning_cnt;
+        switch (result){
+            case WIN:    winning_cnt++;  break;
+            case DRAW:   draw_cnt++;     break;
+            case LOSE:   losing_cnt++;   break;
+            default: break;
+        }
         ++total_rounds;
-        String new_succ_cnt_text = getString(
-                R.string.winning_cnt_tv,
-                winning_cnt
-        );
-        String new_succ_rate_text = getString(
-                R.string.winning_rate_tv,
-                (double)winning_cnt / total_rounds * 100
-        );
-        winning_cnt_tv.setText(new_succ_cnt_text);
-        winning_rate_tv.setText(new_succ_rate_text);
+
+        updateTextInfo();
 
         for(Button btn: player_choose_btns)
             btn.setVisibility(View.GONE);
         new_round_btn.setVisibility(View.VISIBLE);
+    }
+
+    /*
+    * update TextView of winning/losing/draw count...
+     */
+    private void updateTextInfo(){
+        String init_win_cnt_text = getString(
+                R.string.winning_cnt_tv,
+                winning_cnt
+        );
+        String init_draw_cnt_text = getString(
+                R.string.draw_cnt_tv,
+                draw_cnt
+        );
+        String init_lose_cnt_text = getString(
+                R.string.losing_cnt_tv,
+                losing_cnt
+        );
+        String init_win_rate_text = getString(
+                R.string.winning_rate_tv,
+                total_rounds == 0 ? 0.0 : (double)winning_cnt / total_rounds * 100
+        );
+        winning_cnt_tv.setText(init_win_cnt_text);
+        draw_cnt_tv.setText(init_draw_cnt_text);
+        losing_cnt_tv.setText(init_lose_cnt_text);
+        winning_rate_tv.setText(init_win_rate_text);
     }
 }
