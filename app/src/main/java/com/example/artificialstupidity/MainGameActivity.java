@@ -1,14 +1,19 @@
 package com.example.artificialstupidity;
 
+import static android.text.Html.FROM_HTML_MODE_LEGACY;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.Locale;
 import java.util.Random;
 
 
@@ -99,11 +104,8 @@ public class MainGameActivity extends AppCompatActivity {
     private int losing_cnt = 0;
 
     private TextView ai_state_tv;
-    private TextView winning_cnt_tv;
-    private TextView draw_cnt_tv;
-    private TextView losing_cnt_tv;
-    private TextView winning_rate_tv;
-    private Button[] player_choose_btns;
+    private TextView game_info_tv;
+    private ImageButton[] player_choose_btns;
     private Button new_round_btn;
 
     @Override
@@ -112,14 +114,11 @@ public class MainGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_game);
 
         ai_state_tv = (TextView) findViewById(R.id.ai_state);
-        winning_cnt_tv = (TextView) findViewById(R.id.winning_cnt);
-        draw_cnt_tv = (TextView) findViewById(R.id.draw_cnt);
-        losing_cnt_tv = (TextView) findViewById(R.id.losing_cnt);
-        winning_rate_tv = (TextView) findViewById(R.id.winning_rate);
-        player_choose_btns = new Button[]{
-                (Button) findViewById(R.id.player_choose_rock),
-                (Button) findViewById(R.id.player_choose_paper),
-                (Button) findViewById(R.id.player_choose_scissors)
+        game_info_tv = (TextView) findViewById(R.id.game_info);
+        player_choose_btns = new ImageButton[]{
+                (ImageButton) findViewById(R.id.player_choose_rock),
+                (ImageButton) findViewById(R.id.player_choose_paper),
+                (ImageButton) findViewById(R.id.player_choose_scissors)
         };
         new_round_btn = (Button) findViewById(R.id.new_round);
         // new round button is gone by default
@@ -149,7 +148,7 @@ public class MainGameActivity extends AppCompatActivity {
 
     public void startNewRound(View view){
         new_round_btn.setVisibility(View.GONE);
-        for(Button btn: player_choose_btns)
+        for(ImageButton btn: player_choose_btns)
             btn.setVisibility(View.VISIBLE);
     }
 
@@ -177,7 +176,7 @@ public class MainGameActivity extends AppCompatActivity {
 
         updateTextInfo();
 
-        for(Button btn: player_choose_btns)
+        for(ImageButton btn: player_choose_btns)
             btn.setVisibility(View.GONE);
         new_round_btn.setVisibility(View.VISIBLE);
     }
@@ -186,25 +185,16 @@ public class MainGameActivity extends AppCompatActivity {
     * update TextView of winning/losing/draw count...
      */
     private void updateTextInfo(){
-        String init_win_cnt_text = getString(
-                R.string.winning_cnt_tv,
-                winning_cnt
-        );
-        String init_draw_cnt_text = getString(
-                R.string.draw_cnt_tv,
-                draw_cnt
-        );
-        String init_lose_cnt_text = getString(
-                R.string.losing_cnt_tv,
-                losing_cnt
-        );
-        String init_win_rate_text = getString(
-                R.string.winning_rate_tv,
+        @SuppressLint("StringFormatMatches")
+        String game_info_text = getString(
+                R.string.game_info_tv,
+                winning_cnt,
+                draw_cnt,
+                losing_cnt,
                 total_rounds == 0 ? 0.0 : (double)winning_cnt / total_rounds * 100
         );
-        winning_cnt_tv.setText(init_win_cnt_text);
-        draw_cnt_tv.setText(init_draw_cnt_text);
-        losing_cnt_tv.setText(init_lose_cnt_text);
-        winning_rate_tv.setText(init_win_rate_text);
+        Spanned styledText = Html.fromHtml(game_info_text, FROM_HTML_MODE_LEGACY);
+        game_info_tv.setText(styledText);
+        // game_info_tv.setText(game_info_text);
     }
 }

@@ -7,100 +7,82 @@
     tools:context=".MainGameActivity">
 
     <TextView
-        android:id="@+id/winning_cnt"
-        android:layout_width="320dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/draw_cnt"
-        android:layout_width="320dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/winning_cnt" />
-
-    <TextView
-        android:id="@+id/losing_cnt"
-        android:layout_width="320dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/draw_cnt" />
-
-    <TextView
-        android:id="@+id/winning_rate"
-        android:layout_width="320dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="30dp"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/losing_cnt" />
-
-    <TextView
         android:id="@+id/ai_state"
         android:layout_width="320dp"
         android:layout_height="36dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="92dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/winning_rate" />
-
-    <Button
-        android:id="@+id/player_choose_rock"
-        android:layout_width="89dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="128dp"
-        android:onClick="playerChoose"
-        android:text="@string/player_choose_rock"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/player_choose_scissors"
-        android:layout_width="89dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="128dp"
-        android:onClick="playerChoose"
-        android:text="@string/player_choose_scissors"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/player_choose_paper"
-        android:layout_width="wrap_content"
-        android:layout_height="55dp"
-        android:layout_marginBottom="128dp"
-        android:onClick="playerChoose"
-        android:text="@string/player_choose_paper"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/player_choose_scissors"
-        app:layout_constraintStart_toEndOf="@+id/player_choose_rock" />
+        app:layout_constraintTop_toBottomOf="@+id/game_info" />
 
     <Button
         android:id="@+id/new_round"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="132dp"
         android:onClick="startNewRound"
+        android:saveEnabled="false"
         android:text="@string/new_round"
         android:textAlignment="textStart"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/game_info"
+        android:layout_width="320dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/player_choose_rock"
+        android:layout_width="81dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="128dp"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="@string/player_choose_rock"
+        android:onClick="playerChoose"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/rock" />
+
+    <ImageButton
+        android:id="@+id/player_choose_paper"
+        android:layout_width="81dp"
+        android:layout_height="81dp"
+        android:layout_marginBottom="128dp"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="@string/player_choose_paper"
+        android:onClick="playerChoose"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/player_choose_scissors"
-        app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toEndOf="@+id/player_choose_rock" />
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toEndOf="@+id/player_choose_rock"
+        app:srcCompat="@drawable/paper" />
+
+    <ImageButton
+        android:id="@+id/player_choose_scissors"
+        android:layout_width="81dp"
+        android:layout_height="81dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="128dp"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="@string/player_choose_scissors"
+        android:onClick="playerChoose"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/scissors" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

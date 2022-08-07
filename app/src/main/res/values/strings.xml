@@ -8,17 +8,12 @@
     <string name="player_choose_rock">ROCK</string>
     <string name="player_choose_paper">PAPER</string>
     <string name="player_choose_scissors">SCISSORS</string>
-    <string name="winning_cnt_tv">
-        Winning Count: %1$d
-    </string>
-    <string name="draw_cnt_tv">
-        Draw Count: %1$d
-    </string>
-    <string name="losing_cnt_tv">
-        Losing Count: %1$d
-    </string>
-    <string name="winning_rate_tv">
-        Winning Rate: %1$.1f%%
+
+    <string name="game_info_tv">
+        Winning Count: %1$d&lt;br/>
+        Draw Count: %2$d&lt;br/>
+        Losing Count: %3$d&lt;br/>
+        Winning Rate: %4$.1f%%
     </string>
 
 
