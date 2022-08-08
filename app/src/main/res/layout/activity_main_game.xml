@@ -6,20 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".MainGameActivity">
 
-    <TextView
-        android:id="@+id/ai_state"
-        android:layout_width="320dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="92dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/game_info" />
-
     <Button
         android:id="@+id/new_round"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
-        android:layout_marginBottom="132dp"
+        android:layout_marginBottom="72dp"
         android:onClick="startNewRound"
         android:saveEnabled="false"
         android:text="@string/new_round"
@@ -27,13 +18,12 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/game_info"
         android:layout_width="320dp"
-        android:layout_height="200dp"
+        android:layout_height="160dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="64dp"
         android:textColor="@color/black"
@@ -86,5 +76,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/scissors" />
+
+    <ImageView
+        android:id="@+id/ai_state"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginTop="64dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="@string/ai_state_desc"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/game_info"
+        app:srcCompat="@drawable/thinking" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

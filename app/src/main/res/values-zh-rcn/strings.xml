@@ -1,19 +1,24 @@
 <resources>
-    <string name="app_name">artificial stupidity</string>
+    <string name="app_name">人工愚蠢</string>
     <string name="main_title">石头？\n 剪刀？\n 布！</string>
     <string name="start_game_button">开始游戏</string>
     <string name="About_button">关于</string>
 
+    <string name="rock">石头</string>
+    <string name="paper">布</string>
+    <string name="scissors">剪刀</string>
     <string name="new_round">新的一轮</string>
     <string name="player_choose_rock">石头</string>
     <string name="player_choose_paper">布</string>
     <string name="player_choose_scissors">剪刀</string>
+    <string name="ai_state_desc">AI的状态</string>
 
     <string name="game_info_tv">
         胜：%1$d&lt;br/>
         平：%2$d&lt;br/>
         败：%3$d&lt;br/>
-        胜率：%4$.1f%%
+        胜率：%4$.1f%%&lt;br/>
+        你的选择：%5$s
     </string>
 
 
