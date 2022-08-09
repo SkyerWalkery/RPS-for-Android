@@ -13,10 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ArtificialStupidity"
         tools:targetApi="31">
+
+        <!-- Support portrait only -->
         <activity
             android:name=".MainGameActivity"
+            android:exported="false"
             android:parentActivityName=".MainActivity"
-            android:exported="false" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
