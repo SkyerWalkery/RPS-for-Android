@@ -12,13 +12,13 @@
     <string name="player_choose_paper">PAPER</string>
     <string name="player_choose_scissors">SCISSORS</string>
     <string name="ai_state_desc">AI_STATE</string>
+    <string name="player_state_desc">PLAYER_STATE</string>
 
     <string name="game_info_tv">
         Winning Count: %1$d&lt;br/>
         Draw Count: %2$d&lt;br/>
         Losing Count: %3$d&lt;br/>
-        Winning Rate: %4$.1f%%&lt;br/>
-        Your choice: %5$s
+        Winning Rate: %4$.1f%%
     </string>
 
 

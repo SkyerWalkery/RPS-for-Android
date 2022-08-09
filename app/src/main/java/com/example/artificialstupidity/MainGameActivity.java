@@ -30,7 +30,6 @@ interface Choice {
     Result eval(Rock against);
     Result eval(Paper against);
     Result eval(Scissors against);
-    String getString(MainGameActivity activity);
 }
 
 class Rock implements Choice{
@@ -49,10 +48,6 @@ class Rock implements Choice{
     @Override
     public Result eval(Scissors against){
         return Result.LOSE;
-    }
-    @Override
-    public String getString(MainGameActivity activity) {
-        return activity.getString(R.string.rock);
     }
 }
 
@@ -73,10 +68,6 @@ class Paper implements Choice{
     public Result eval(Scissors against){
         return Result.WIN;
     }
-    @Override
-    public String getString(MainGameActivity activity) {
-        return activity.getString(R.string.paper);
-    }
 }
 
 class Scissors implements Choice{
@@ -96,10 +87,6 @@ class Scissors implements Choice{
     public Result eval(Scissors against){
         return Result.DRAW;
     }
-    @Override
-    public String getString(MainGameActivity activity) {
-        return activity.getString(R.string.scissors);
-    }
 }
 
 
@@ -112,6 +99,7 @@ public class MainGameActivity extends AppCompatActivity {
     private int losing_cnt = 0;
 
     private ImageView ai_state_iv;
+    private ImageView player_state_iv;
     private TextView game_info_tv;
     private ImageButton[] player_choose_btns;
     private Button new_round_btn;
@@ -122,6 +110,9 @@ public class MainGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_game);
 
         ai_state_iv = (ImageView) findViewById(R.id.ai_state);
+        player_state_iv = (ImageView) findViewById(R.id.player_state);
+        player_state_iv.setVisibility(View.GONE);
+
         game_info_tv = (TextView) findViewById(R.id.game_info);
         player_choose_btns = new ImageButton[]{
                 (ImageButton) findViewById(R.id.player_choose_rock),
@@ -138,20 +129,14 @@ public class MainGameActivity extends AppCompatActivity {
     public void playerChoose(View view){
         // parse player's choose, according to which view user click on
         Choice player_choice;
-        int visible_button_id;
+        
         int view_id = view.getId();
-        if(view_id == R.id.player_choose_rock) {
+        if(view_id == R.id.player_choose_rock)
             player_choice = new Rock();
-            visible_button_id = 0;
-        }
-        else if(view_id == R.id.player_choose_paper) {
+        else if(view_id == R.id.player_choose_paper)
             player_choice = new Paper();
-            visible_button_id = 1;
-        }
-        else {
+        else
             player_choice = new Scissors();
-            visible_button_id = 2;
-        }
 
         // get ai's choice
         Choice ai_choice = getAINextChoice();
@@ -159,10 +144,9 @@ public class MainGameActivity extends AppCompatActivity {
         handleResult(res);
 
         updateTextInfo(player_choice);
-        updateAIInfo(ai_choice);
+        updateImageInfo(ai_choice, player_choice);
         for(ImageButton btn: player_choose_btns)
             btn.setVisibility(View.GONE);
-        //player_choose_btns[visible_button_id].setVisibility(View.VISIBLE);
         new_round_btn.setVisibility(View.VISIBLE);
     }
 
@@ -170,7 +154,7 @@ public class MainGameActivity extends AppCompatActivity {
         new_round_btn.setVisibility(View.GONE);
         for(ImageButton btn: player_choose_btns)
             btn.setVisibility(View.VISIBLE);
-        updateAIInfo(null);
+        updateImageInfo();
     }
 
     private static Choice getAINextChoice(){
@@ -206,34 +190,42 @@ public class MainGameActivity extends AppCompatActivity {
                 winning_cnt,
                 draw_cnt,
                 losing_cnt,
-                total_rounds == 0 ? 0.0 : (double)winning_cnt / total_rounds * 100,
-                player_choice == null ? "" : player_choice.getString(this)
+                total_rounds == 0 ? 0.0 : (double)winning_cnt / total_rounds * 100
         );
         Spanned styledText = Html.fromHtml(game_info_text, FROM_HTML_MODE_LEGACY);
         game_info_tv.setText(styledText);
         // game_info_tv.setText(game_info_text);
     }
 
-    private void updateAIInfo(Choice ai_choice){
-        Resources res = getResources();
-        Drawable drawable;
-
-        if(ai_choice == null){
-            drawable = ResourcesCompat.getDrawable(res, R.drawable.thinking, null);
-            ai_state_iv.setImageDrawable(drawable);
-            return;
+    private void updateImageInfo(@NonNull Choice ai_choice, @NonNull Choice player_choice){
+        try {
+            ai_state_iv.setImageDrawable(getDrawableFromChoice(ai_choice));
+            player_state_iv.setVisibility(View.VISIBLE);
+            player_state_iv.setImageDrawable(getDrawableFromChoice(player_choice));
+        }catch(NullPointerException e){
+            throw new RuntimeException(e);
         }
+    }
 
-        Class<? extends Choice> ai_choice_class = ai_choice.getClass();
+    // Set imageView of player's state as GONE
+    // Set ai as "thinking"
+    private void updateImageInfo(){
+        Resources res = getResources();
+        Drawable drawable = ResourcesCompat.getDrawable(res, R.drawable.thinking, null);
+        ai_state_iv.setImageDrawable(drawable);
+        player_state_iv.setVisibility(View.GONE);
+    }
+
+    private Drawable getDrawableFromChoice(Choice choice){
+        Resources res = getResources();
+        Class<? extends Choice> choice_class = choice.getClass();
         int drawable_id;
-        if(ai_choice_class == Rock.class)
+        if(choice_class == Rock.class)
             drawable_id = R.drawable.rock;
-        else if(ai_choice_class == Paper.class)
+        else if(choice_class == Paper.class)
             drawable_id = R.drawable.paper;
         else
             drawable_id = R.drawable.scissors;
-
-        drawable = ResourcesCompat.getDrawable(res, drawable_id, null);
-        ai_state_iv.setImageDrawable(drawable);
+        return ResourcesCompat.getDrawable(res, drawable_id, null);
     }
 }

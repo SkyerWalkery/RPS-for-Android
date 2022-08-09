@@ -12,13 +12,13 @@
     <string name="player_choose_paper">布</string>
     <string name="player_choose_scissors">剪刀</string>
     <string name="ai_state_desc">AI的状态</string>
+    <string name="player_state_desc">玩家的状态</string>
 
     <string name="game_info_tv">
         胜：%1$d&lt;br/>
         平：%2$d&lt;br/>
         败：%3$d&lt;br/>
-        胜率：%4$.1f%%&lt;br/>
-        你的选择：%5$s
+        胜率：%4$.1f%%
     </string>
 
 
