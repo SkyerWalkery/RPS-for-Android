@@ -22,13 +22,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startAbout(View view) {
-        try {
-            startActivity(new Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://github.com/SkyerWalkery/RPS-for-Android")
-            ));
-        }catch(ActivityNotFoundException ignored){
-            // TODO: sent a msg when failing to open the web site
-        }
+        startActivity(new Intent(this, AboutActivity.class));
     }
+
 }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutActivity">
+
+    <ImageView
+        android:id="@+id/about_icon_iv"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="64dp"
+        android:contentDescription="@string/app_icon_desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/about_app_name_tv"
+        android:layout_width="128dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/about_icon_iv" />
+
+    <TextView
+        android:id="@+id/about_app_slogan_tv"
+        android:layout_width="128dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:onClick="clickSloganTextView"
+        android:text="@string/app_slogan"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/about_app_name_tv" />
+
+    <TextView
+        android:id="@+id/about_version_tv"
+        android:layout_width="128dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="4dp"
+        android:clickable="true"
+        android:onClick="clickVersionTextView"
+        android:text="@string/app_version"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/about_app_slogan_tv" />
+
+    <ImageView
+        android:id="@+id/about_github_iv"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="128dp"
+        android:clickable="true"
+        android:contentDescription="@string/github_mark_desc"
+        android:onClick="jumpToGithub"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/github_mark_120px_plus" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
